@@ -73,6 +73,7 @@ class WebUI:
             server_port: int = None,
             concurrency_limit: int = 10,
             enable_mention: bool = False,
+            launch: bool = True,
             **kwargs):
         self.run_kwargs = kwargs
 
@@ -162,9 +163,12 @@ class WebUI:
 
             demo.load(None)
 
-        demo.queue(default_concurrency_limit=concurrency_limit).launch(share=share,
+        if launch:
+            demo.queue(default_concurrency_limit=concurrency_limit).launch(share=share,
                                                                        server_name=server_name,
                                                                        server_port=server_port)
+        else:
+            return demo
 
     def change_agent(self, agent_selector):
         yield agent_selector, self._create_agent_info_block(agent_selector), self._create_agent_plugins_block(
