@@ -55,7 +55,7 @@ class WebUI:
             'description': agent.description or "I'm a helpful assistant.",
         } for agent in self.agent_list]
 
-        self.input_placeholder = chatbot_config.get('input.placeholder', '跟我聊聊吧～')
+        self.input_placeholder = chatbot_config.get('input.placeholder', 'Talk to me~')
         self.prompt_suggestions = chatbot_config.get('prompt.suggestions', [])
         self.verbose = chatbot_config.get('verbose', False)
 
@@ -111,7 +111,7 @@ class WebUI:
                         agent_selector = gr.Dropdown(
                             [(agent.name, i) for i, agent in enumerate(self.agent_list)],
                             label='Agents',
-                            info='选择一个Agent',
+                            info='Select an Agent',
                             value=0,
                             interactive=True,
                         )
@@ -122,7 +122,7 @@ class WebUI:
 
                     if self.prompt_suggestions:
                         gr.Examples(
-                            label='推荐对话',
+                            label='Recommended dialogue',
                             examples=self.prompt_suggestions,
                             inputs=[input],
                         )
@@ -310,7 +310,7 @@ class WebUI:
         if agent_interactive.function_map:
             capabilities = [key for key in agent_interactive.function_map.keys()]
             return gr.CheckboxGroup(
-                label='插件',
+                label='Plugins',
                 value=capabilities,
                 choices=capabilities,
                 interactive=False,
@@ -318,7 +318,7 @@ class WebUI:
 
         else:
             return gr.CheckboxGroup(
-                label='插件',
+                label='Plugins',
                 value=[],
                 choices=[],
                 interactive=False,
